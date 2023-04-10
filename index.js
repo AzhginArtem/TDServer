@@ -10,8 +10,7 @@ const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, 'static')));
-app.use('/api', router);
+app.use('/api', router, express.static(path.resolve(__dirname, 'static')));
 
 app.use(errorHandler);
 
@@ -20,7 +19,7 @@ const start = async () => {
     await sequelize.authenticate();
     await sequelize.sync();
     app.listen(process.env.PORT, () => {
-      console.log('Server listening on port 5000');
+      console.log('Server listening on port ' + process.env.PORT);
     });
   } catch (err) {}
 };

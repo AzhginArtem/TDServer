@@ -53,6 +53,13 @@ class OrdersController {
     });
     return res.json(stocks);
   }
+
+  async getAllCurrencies(req, res) {
+    const currencies = await Currency.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
+    return res.json(currencies);
+  }
 }
 
 module.exports = new OrdersController();
